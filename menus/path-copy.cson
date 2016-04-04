@@ -1,0 +1,10 @@
+"context-menu":
+  ".tab": [
+    {
+        label: "Copy Full Path"
+        command: "path-copy:copy-full-path"
+    }
+    {
+        type: 'separator'
+    },
+  ]

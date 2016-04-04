@@ -1,0 +1,15 @@
+{
+  "name": "path-copy",
+  "main": "./lib/path-copy.js",
+  "version": "0.1.0",
+  "description": "A short description of your package",
+  "keywords": [
+  ],
+  "repository": "https://github.com/msansoni/atom-path-copy",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}
