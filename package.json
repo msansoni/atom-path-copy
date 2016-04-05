@@ -1,7 +1,7 @@
 {
   "name": "path-copy",
   "main": "./lib/path-copy.js",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Copy editor file path from the tab context menu.",
   "keywords": [],
   "repository": "https://github.com/msansoni/atom-path-copy",
