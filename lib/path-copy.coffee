@@ -3,34 +3,54 @@ path = require 'path'
 
 module.exports =
   config:
+    quotationCharacter:
+      type: 'string'
+      default: ''
+      title: 'Quotation Character'
+      description: 'Define a character to surround the copied path'
+      order: 1
     copyFullPath:
       type: 'boolean'
       default: true
+      title: 'Copy Full Path'
       description: 'Copies the full file path to the clipboard'
-    copyShortName:
-      type: 'boolean'
-      default: true
-      description: 'Copies the short file name to the clipboard (without the extension)'
+      order: 2
     copyFullName:
       type: 'boolean'
       default: true
+      title: 'Copy Full Name'
       description: 'Copies the full file name to the clipboard (with the extension)'
-    copyFolderPath:
+      order: 3
+    copyShortName:
       type: 'boolean'
       default: true
-      description: 'Copies the folder path to the clipboard'
-    copyProjectPath:
-      type: 'boolean'
-      default: true
-      description: 'Copies the project path to the clipboard'
-    copyRelativePath:
-      type: 'boolean'
-      default: true
-      description: 'Copies the relative path of the file in the project to the clipboard'
+      title: 'Copy Short Name'
+      description: 'Copies the short file name to the clipboard (without the extension)'
+      order: 4
     copyExtension:
       type: 'boolean'
       default: true
+      title: 'Copy Extension'
       description: 'Copies the extension of the file to the clipboard'
+      order: 5
+    copyFolderPath:
+      type: 'boolean'
+      default: true
+      title: 'Copy Folder Path'
+      description: 'Copies the folder path to the clipboard'
+      order: 6
+    copyProjectPath:
+      type: 'boolean'
+      default: true
+      title: 'Copy Project Path'
+      description: 'Copies the project path to the clipboard'
+      order: 7
+    copyRelativePath:
+      type: 'boolean'
+      default: true
+      title: 'Copy Relative Path'
+      description: 'Copies the relative path of the file in the project to the clipboard'
+      order: 8
 
   subscriptions: null
 
@@ -47,14 +67,14 @@ module.exports =
       'path-copy:extension': => @copyExtension()
 
     @subscriptions.add atom.config.onDidChange 'path-copy',
-      => @setContextMenu()
+      => @updateSettings()
 
-    @setContextMenu()
+    @updateSettings()
 
   deactivate: ->
     @subscriptions.dispose()
 
-  setContextMenu: ->
+  updateSettings: ->
     # Add menuitems, depending on configuration choices
     isCopyFullPath = atom.config.get('path-copy.copyFullPath')
     isCopyShortName = atom.config.get('path-copy.copyShortName')
@@ -81,8 +101,21 @@ module.exports =
         ]
       }]
 
+  raiseNotificationSuccess: (textpath) ->
+    atom.notifications.addSuccess("path-copy: #{textpath}")
+
+  raiseNotificationError: ->
+    atom.notifications.addError("path-copy: Editor file does not exist on the system directory as a valid path.")
+
   writeToClipboard: (textpath) ->
+    character = atom.config.get('path-copy.quotationCharacter')
+
+    if character?.length
+      textpath = character + textpath + character
+
     atom.clipboard.write(textpath)
+
+    @raiseNotificationSuccess(textpath)
 
   getTabContextClicked: ->
     return document.querySelector('.right-clicked')
@@ -104,6 +137,7 @@ module.exports =
     if tabPath?
       return path.parse(tabPath)
     else
+      @raiseNotificationError()
       return path.parse('')
 
   # Methods to write to clipboard the specific options
@@ -130,3 +164,5 @@ module.exports =
 
     if tabPath?
       @writeToClipboard(tabPath)
+    else
+      @raiseNotificationError()
