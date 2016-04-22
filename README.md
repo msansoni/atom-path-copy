@@ -1,5 +1,7 @@
 # [path-copy](https://github.com/msansoni/atom-path-copy)
 
+[![Build Status](https://travis-ci.org/msansoni/atom-path-copy.svg?branch=master)](https://travis-ci.org/msansoni/atom-path-copy)
+
 Add context menu options to the tab context menu to copy the open editor file path.
 
 Atom Package: https://atom.io/packages/path-copy
