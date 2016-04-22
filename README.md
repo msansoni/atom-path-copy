@@ -36,6 +36,10 @@ Context menu items can easily be set to visible/hidden by clicking the checkboxe
 - Atom Package Settings  
   `Atom` ➔ `Preferences` ➔ Search for `path-copy`
 
+The configuration page also allows users to set quotation characters such as `""` or `''` to enclose path strings.
+
+Notifications can also be toggled on/off to show successful path-copy commands and the paths that have been added to the clipboard.
+
 ## License
 
 [MIT](https://github.com/msansoni/atom-path-copy/blob/master/LICENSE.md) © [Michael Sansoni](http://www.michaelsansoni.com)
