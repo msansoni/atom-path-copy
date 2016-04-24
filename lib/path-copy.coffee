@@ -82,28 +82,37 @@ module.exports =
 
   updateSettings: ->
     # Add menuitems, depending on configuration choices
-    isCopyFullPath = atom.config.get('path-copy.copyFullPath')
-    isCopyShortName = atom.config.get('path-copy.copyShortName')
-    isCopyFullName = atom.config.get('path-copy.copyFullName')
-    isCopyFolderPath = atom.config.get('path-copy.copyFolderPath')
-    isCopyProjectPath = atom.config.get('path-copy.copyProjectPath')
-    isCopyRelativePath = atom.config.get('path-copy.copyRelativePath')
-    isCopyExtension = atom.config.get('path-copy.copyExtension')
+    contextMenuOptions = {
+      isCopyFullPath : atom.config.get('path-copy.copyFullPath'),
+      isCopyShortName : atom.config.get('path-copy.copyShortName'),
+      isCopyFullName : atom.config.get('path-copy.copyFullName'),
+      isCopyFolderPath : atom.config.get('path-copy.copyFolderPath'),
+      isCopyProjectPath : atom.config.get('path-copy.copyProjectPath'),
+      isCopyRelativePath : atom.config.get('path-copy.copyRelativePath'),
+      isCopyExtension : atom.config.get('path-copy.copyExtension')
+    }
+
+    # Check if any of the config options are visible
+    # Will accept any PR to clean this up into one line :)
+    anyVisible = false
+    for k, v of contextMenuOptions
+      if v is true
+        anyVisible = true
 
     atom.contextMenu.add
       '.tab': [{
         label: 'Path Copy'
         submenu: [
-          {label: 'Copy Full Path', command: 'path-copy:fullpath', visible: isCopyFullPath}
-          {label: 'Copy Full Name', command: 'path-copy:fullname', visible: isCopyFullName}
-          {label: 'Copy Short Name', command: 'path-copy:shortname', visible: isCopyShortName}
-          {label: 'Copy Extension', command: 'path-copy:extension', visible: isCopyExtension}
+          {label: 'Copy Full Path', command: 'path-copy:fullpath', visible: contextMenuOptions.isCopyFullPath}
+          {label: 'Copy Full Name', command: 'path-copy:fullname', visible: contextMenuOptions.isCopyFullName}
+          {label: 'Copy Short Name', command: 'path-copy:shortname', visible: contextMenuOptions.isCopyShortName}
+          {label: 'Copy Extension', command: 'path-copy:extension', visible: contextMenuOptions.isCopyExtension}
           {type: 'separator'}
-          {label: 'Copy Folder Path', command: 'path-copy:folderpath', visible: isCopyFolderPath}
-          {label: 'Copy Project Path', command: 'path-copy:projectpath', visible: isCopyProjectPath}
-          {label: 'Copy Relative Path', command: 'path-copy:relativepath', visible: isCopyRelativePath}
+          {label: 'Copy Folder Path', command: 'path-copy:folderpath', visible: contextMenuOptions.isCopyFolderPath}
+          {label: 'Copy Project Path', command: 'path-copy:projectpath', visible: contextMenuOptions.isCopyProjectPath}
+          {label: 'Copy Relative Path', command: 'path-copy:relativepath', visible: contextMenuOptions.isCopyRelativePath}
           {type: 'separator'}
-          {label: 'Add Options in Settings', command: '', visible: false, enabled: false}
+          {label: 'Add Options in Settings', command: '', visible: !anyVisible, enabled: false}
         ]
       }]
 

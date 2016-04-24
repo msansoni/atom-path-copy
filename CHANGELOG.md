@@ -2,6 +2,12 @@
 
 https://github.com/msansoni/atom-path-copy
 
+## 0.11.3 - (2016-04-24)
+- Check for config options, display default menu item if zero are visible
+
+## 0.11.2 - (2016-04-24)
+- Changed handling of path retrieval
+
 ## 0.11.1 - (2016-04-23)
 - Travis CI build test
 
