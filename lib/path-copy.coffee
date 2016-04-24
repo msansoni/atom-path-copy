@@ -132,7 +132,11 @@ module.exports =
 
   getTabPath: ->
     tab = @getTabContextClicked()
-    return tab.path
+
+    if tab.path?
+      return tab.path
+    else
+      return ''
 
   getRelativePath: ->
     [projectPath, relativePath] = atom.project.relativizePath(@getTabPath())
@@ -143,11 +147,7 @@ module.exports =
 
   parseTabPath: ->
     tabPath = @getTabPath()
-
-    if tabPath?
-      return path.parse(tabPath)
-    else
-      return path.parse('')
+    return path.parse(tabPath)
 
   # Methods to write to clipboard the specific options
   copyShortName: ->
@@ -169,7 +169,4 @@ module.exports =
     @writeToClipboard(@getRelativePath().relativePath)
 
   copyFullPath: ->
-    tabPath = @getTabPath()
-
-    if tabPath?
-      @writeToClipboard(tabPath)
+    @writeToClipboard(@getTabPath())
