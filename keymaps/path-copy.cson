@@ -7,5 +7,5 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
-'atom-text-editor':
-  'ctrl-alt-p': 'path-copy:copy-current-editor-path'
+'atom-pane':
+  'ctrl-alt-p': 'path-copy:copy-current-tab-path'

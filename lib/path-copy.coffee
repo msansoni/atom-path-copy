@@ -71,7 +71,7 @@ module.exports =
             'path-copy:projectpath': => @copyProjectPath()
             'path-copy:relativepath': => @copyRelativePath()
             'path-copy:extension': => @copyExtension()
-            'path-copy:copy-current-editor-path': => @copyCurrentEditorPath()
+            'path-copy:copy-current-tab-path': => @copyCurrentTabPath()
 
         @subscriptions.add atom.config.onDidChange 'path-copy',
             => @updateSettings()
@@ -162,7 +162,7 @@ module.exports =
         return path.parse(tabPath)
 
     # Methods to write to clipboard the specific options
-    copyCurrentEditorPath: ->
+    copyCurrentTabPath: ->
         @writeToClipboard(@getCurrentTabPath())
 
     copyShortName: ->

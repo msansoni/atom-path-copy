@@ -2,6 +2,10 @@
 
 https://github.com/msansoni/atom-path-copy
 
+## 0.12.4 - (2016-05-11)
+- Keybinding able to parse any pane path, rather than only the
+  atom-text-editor path
+
 ## 0.12.3 - (2016-05-11)
 - Fix regression issue from 0.12.1
 
