@@ -138,23 +138,15 @@ module.exports =
         @raiseNotificationError()
 
   getCurrentTabPath: ->
-    path = atom.workspace.getActivePaneItem().getPath()
-
-    if not path
-      return ''
-    else
-      return path
+    path = atom.workspace.getActivePaneItem().getURI()
+    return path
 
   getTabContextClicked: ->
     return document.querySelector('.right-clicked')
 
   getTabPath: ->
     tab = @getTabContextClicked()
-
-    if tab.path?
-      return tab.path
-    else
-      return ''
+    return tab.pane.getActiveItem().getURI()
 
   getRelativePath: ->
     [projectPath, relativePath] = atom.project.relativizePath(@getTabPath())
