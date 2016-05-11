@@ -2,6 +2,17 @@
 
 https://github.com/msansoni/atom-path-copy
 
+## 0.12.2 - (2016-05-11)
+- Improvements for context menu
+- Beautified path-copy.coffee
+
+## 0.12.1 - (2016-05-11)
+- getPath now replaced to get pane URI to handle ATOM URIs
+
+## 0.12.0 - (2016-05-11)
+- Enhancement for Issue #1 from maksad
+- Keybinding to copy current editor path
+
 ## 0.11.3 - (2016-04-24)
 - Check for config options, display default menu item if zero are visible
 
