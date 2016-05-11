@@ -148,7 +148,7 @@ module.exports =
 
     getTabPath: ->
         tab = @getTabContextClicked()
-        return tab.pane.getActiveItem().getURI()
+        return tab.item.getURI()
 
     getRelativePath: ->
         [projectPath, relativePath] = atom.project.relativizePath(@getTabPath())

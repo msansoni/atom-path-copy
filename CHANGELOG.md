@@ -2,6 +2,9 @@
 
 https://github.com/msansoni/atom-path-copy
 
+## 0.12.3 - (2016-05-11)
+- Fix regression issue from 0.12.1
+
 ## 0.12.2 - (2016-05-11)
 - Improvements for context menu
 - Beautified path-copy.coffee
