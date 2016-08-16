@@ -2,6 +2,9 @@
 
 https://github.com/msansoni/atom-path-copy
 
+## 0.13.0 - (2016-08-15)
+- Enhancement see (see [issue\#2](https://github.com/msansoni/atom-path-copy/issues/12) from [ethanclevenger92](https://github.com/ethanclevenger91)
+
 ## 0.12.4 - (2016-05-11)
 - Keybinding able to parse any pane path, rather than only the
   atom-text-editor path
@@ -17,7 +20,7 @@ https://github.com/msansoni/atom-path-copy
 - getPath now replaced to get pane URI to handle ATOM URIs
 
 ## 0.12.0 - (2016-05-11)
-- Enhancement for Issue #1 from maksad
+- Enhancement see (see [issue\#1](https://github.com/msansoni/atom-path-copy/issues/1)) from [maksad](https://github.com/maksad)
 - Keybinding to copy current editor path
 
 ## 0.11.3 - (2016-04-24)

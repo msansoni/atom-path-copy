@@ -71,7 +71,14 @@ module.exports =
             'path-copy:projectpath': => @copyProjectPath()
             'path-copy:relativepath': => @copyRelativePath()
             'path-copy:extension': => @copyExtension()
-            'path-copy:copy-current-tab-path': => @copyCurrentTabPath()
+
+            'path-copy:current-fullpath': => @copyCurrentFullPath()
+            'path-copy:current-shortname': => @copyCurrentShortName()
+            'path-copy:current-fullname': => @copyCurrentFullName()
+            'path-copy:current-folderpath': => @copyCurrentFolderPath()
+            'path-copy:current-projectpath': => @copyCurrentProjectPath()
+            'path-copy:current-relativepath': => @copyCurrentRelativePath()
+            'path-copy:current-extension': => @copyCurrentExtension()
 
         @subscriptions.add atom.config.onDidChange 'path-copy',
             => @updateSettings()
@@ -146,25 +153,25 @@ module.exports =
     getTabContextClicked: ->
         return document.querySelector('.right-clicked')
 
-    getTabPath: ->
+    getTabPath: (current)->
+      if current == true
+        return atom.workspace.getActivePaneItem().getURI()
+      else
         tab = @getTabContextClicked()
         return tab.item.getURI()
 
-    getRelativePath: ->
-        [projectPath, relativePath] = atom.project.relativizePath(@getTabPath())
+    getRelativePath: (current=false)->
+        [projectPath, relativePath] = atom.project.relativizePath(@getTabPath(current))
         return {
             projectPath : projectPath
             relativePath: relativePath
         }
 
-    parseTabPath: ->
-        tabPath = @getTabPath()
+    parseTabPath: (current=false) ->
+        tabPath = @getTabPath(current)
         return path.parse(tabPath)
 
     # Methods to write to clipboard the specific options
-    copyCurrentTabPath: ->
-        @writeToClipboard(@getCurrentTabPath())
-
     copyShortName: ->
         @writeToClipboard(@parseTabPath().name)
 
@@ -185,3 +192,25 @@ module.exports =
 
     copyFullPath: ->
         @writeToClipboard(@getTabPath())
+
+    # Modified verions for key-bindings
+    copyCurrentShortName: ->
+        @writeToClipboard(@parseTabPath(true).name)
+
+    copyCurrentFullName: ->
+        @writeToClipboard(@parseTabPath(true).base)
+
+    copyCurrentFolderPath: ->
+        @writeToClipboard(@parseTabPath(true).dir)
+
+    copyCurrentExtension: ->
+        @writeToClipboard(@parseTabPath(true).ext)
+
+    copyCurrentProjectPath: ->
+        @writeToClipboard(@getRelativePath(true).projectPath)
+
+    copyCurrentRelativePath: ->
+        @writeToClipboard(@getRelativePath(true).relativePath)
+
+    copyCurrentFullPath: ->
+        @writeToClipboard(@getTabPath(true))

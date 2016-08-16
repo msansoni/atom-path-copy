@@ -7,5 +7,11 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
-'atom-pane':
-  'ctrl-alt-p': 'path-copy:copy-current-tab-path'
+'atom-text-editor':
+  'cmd-alt-w': 'path-copy:current-fullpath'
+  'cmd-alt-e': 'path-copy:current-shortname'
+  'cmd-alt-r': 'path-copy:current-fullname'
+  'cmd-alt-t': 'path-copy:current-folderpath'
+  'cmd-alt-y': 'path-copy:current-projectpath'
+  'cmd-alt-u': 'path-copy:current-relativepath'
+  'cmd-alt-i': 'path-copy:current-extension'

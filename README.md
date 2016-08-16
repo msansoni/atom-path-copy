@@ -42,6 +42,22 @@ The configuration page also allows users to set quotation characters such as `""
 
 Notifications can also be toggled on/off to show successful path-copy commands and the paths that have been added to the clipboard.
 
+## Keyboard Shortcut
+
+All [path-copy](https://atom.io/packages/path-copy) functions are available directly via keyboard shortcuts, for example: <kbd>Cmd</kbd>-<kbd>Alt</kbd>-<kbd>W</kbd> as a shortcut to copy the current editor's full file path.
+
+### Custom Keyboard Shortcuts
+
+The default key-bindings can be modified in your keymap.cson file.
+See [Keymaps In-Depth](https://atom.io/docs/latest/behind-atom-keymaps-in-depth) for more details.
+
+For example:
+
+```coffeescript
+'atom-text-editor':
+  'alt-cmd-w': 'path-copy:current-fullpath'
+```
+
 ## License
 
 [MIT](https://github.com/msansoni/atom-path-copy/blob/master/LICENSE.md) © [Michael Sansoni](http://www.michaelsansoni.com)
