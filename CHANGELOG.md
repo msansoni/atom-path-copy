@@ -2,6 +2,10 @@
 
 https://github.com/msansoni/atom-path-copy
 
+## 0.14.0 - (2016-08-17)
+- Improvements to notifications. Option for 'status' style atom-space-pen-views
+  or 'pop-up' style atom-notifications. Choice can be toggled in package config
+
 ## 0.13.0 - (2016-08-15)
 - Enhancement see [issue\#2](https://github.com/msansoni/atom-path-copy/issues/12) from [ethanclevenger92](https://github.com/ethanclevenger91)
 

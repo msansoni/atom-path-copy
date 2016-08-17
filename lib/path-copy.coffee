@@ -1,5 +1,6 @@
 {CompositeDisposable} = require 'atom'
 path = require 'path'
+OutputViewManager = require './output-view-manager'
 
 module.exports =
     config:
@@ -9,54 +10,67 @@ module.exports =
             title: 'Quotation Character'
             description: 'Define a character to surround the copied path. Default is none.'
             order: 1
-        displayNotifications:
+        statusNotifications:
             type: 'boolean'
             default: true
-            title: 'Display notifications'
-            description: 'Show notifications when path-copy has been called on whether the command was successful or not. On successful commands the notifications also displays the path text that has been copied to the clipboard.'
+            title: 'Status-bar stlye notifications'
+            description: 'Show status-bar style notifications when path-copy has been called on whether the command was successful or not. On successful commands the notifications also displays the path text that has been copied to the clipboard.'
             order: 2
+        popupNotifications:
+            type: 'boolean'
+            default: false
+            title: 'Pop-up stlye notifications'
+            description: 'Show pop-up style notifications when path-copy has been called on whether the command was successful or not. On successful commands the notifications also displays the path text that has been copied to the clipboard.'
+            order: 3
+        messageTimeout:
+            type: 'integer'
+            default: 5
+            minimum: 1
+            title: 'Notification timeout (s)'
+            description: 'Length of time to display status-bar style notifications before removing'
+            order: 4
         copyFullPath:
             type: 'boolean'
             default: true
             title: 'Copy Full Path'
             description: 'Copies the full file path to the clipboard.'
-            order: 3
+            order: 5
         copyFullName:
             type: 'boolean'
             default: true
             title: 'Copy Full Name'
             description: 'Copies the full file name to the clipboard (with the extension).'
-            order: 4
+            order: 6
         copyShortName:
             type: 'boolean'
             default: true
             title: 'Copy Short Name'
             description: 'Copies the short file name to the clipboard (without the extension).'
-            order: 5
+            order: 7
         copyExtension:
             type: 'boolean'
             default: true
             title: 'Copy Extension'
             description: 'Copies the extension of the file to the clipboard.'
-            order: 6
+            order: 8
         copyFolderPath:
             type: 'boolean'
             default: true
             title: 'Copy Folder Path'
             description: 'Copies the folder path to the clipboard.'
-            order: 7
+            order: 9
         copyProjectPath:
             type: 'boolean'
             default: true
             title: 'Copy Project Path'
             description: 'Copies the project path to the clipboard.'
-            order: 8
+            order: 10
         copyRelativePath:
             type: 'boolean'
             default: true
             title: 'Copy Relative Path'
             description: 'Copies the relative path of the file in the project to the clipboard.'
-            order: 9
+            order: 11
 
     subscriptions: null
 
@@ -127,10 +141,20 @@ module.exports =
             ]
 
     raiseNotificationSuccess: (textpath) ->
-        atom.notifications.addSuccess("path-copy: #{textpath} added to clipboard.", {dismissable: true})
+        msg = 'path-copy: ' + textpath + ' added to clipboard.'
+
+        if atom.config.get('path-copy.popupNotifications')
+          atom.notifications.addSuccess(msg, {dismissable: true})
+        if atom.config.get('path-copy.statusNotifications')
+          OutputViewManager.create().addLine(msg).finish()
 
     raiseNotificationError: ->
-        atom.notifications.addError("path-copy: Editor file does not exist on the system directory as a valid path.", {dismissable: true})
+        msg = 'path-copy: Editor file does not exist on the system directory as a valid path.'
+
+        if atom.config.get('path-copy.popupNotifications')
+          atom.notifications.addError(msg, {dismissable: true})
+        if atom.config.get('path-copy.statusNotifications')
+          OutputViewManager.create().addLine(msg).finish()
 
     writeToClipboard: (textpath) ->
         character = atom.config.get('path-copy.quotationCharacter')
@@ -140,11 +164,10 @@ module.exports =
 
         atom.clipboard.write(textpath)
 
-        if atom.config.get('path-copy.displayNotifications')
-            if textpath != ''
-                @raiseNotificationSuccess(textpath)
-            else
-                @raiseNotificationError()
+        if textpath != ''
+            @raiseNotificationSuccess(textpath)
+        else
+            @raiseNotificationError()
 
     getCurrentTabPath: ->
         path = atom.workspace.getActivePaneItem().getURI()
