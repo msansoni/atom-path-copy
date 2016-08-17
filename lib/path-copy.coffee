@@ -1,5 +1,6 @@
 {CompositeDisposable} = require 'atom'
 path = require 'path'
+{MessagePanelView, PlainMessageView} = require 'atom-message-panel'
 
 module.exports =
     config:
@@ -83,6 +84,10 @@ module.exports =
         @subscriptions.add atom.config.onDidChange 'path-copy',
             => @updateSettings()
 
+        @messages = new MessagePanelView
+          title: 'PathCopy'
+        @messages.attach()
+
         @updateSettings()
 
     deactivate: ->
@@ -128,6 +133,9 @@ module.exports =
 
     raiseNotificationSuccess: (textpath) ->
         atom.notifications.addSuccess("path-copy: #{textpath} added to clipboard.", {dismissable: true})
+
+        @messages.add new PlainMessageView
+          message: 'path-copy: ' + textpath + ' added to clipboard.'
 
     raiseNotificationError: ->
         atom.notifications.addError("path-copy: Editor file does not exist on the system directory as a valid path.", {dismissable: true})

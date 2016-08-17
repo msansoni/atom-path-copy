@@ -19,7 +19,9 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "atom-message-panel": "1.2.4"
+  },
   "keywords": [
     "atom",
     "path",
