@@ -1,6 +1,5 @@
 {CompositeDisposable} = require 'atom'
 path = require 'path'
-notify = require 'atom-notify'
 
 module.exports =
     config:
