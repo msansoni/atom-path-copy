@@ -1,0 +1,43 @@
+'context-menu':
+  'atom-text-editor': [
+    label: 'Path Copy'
+    submenu:[
+      { label: 'Copy Full Path', command: 'path-copy:fullpath' },
+      { label: 'Copy Full Name', command: 'path-copy:fullname' },
+      { label: 'Copy Short Name', command: 'path-copy:shortname' },
+      { label: 'Copy Extension', command: 'path-copy:extension' },
+      { label: 'Copy Folder Path', command: 'path-copy:folderpath' },
+      { label: 'Copy Project Path', command: 'path-copy:projectpath' },
+      { label: 'Copy Relative Path', command: 'path-copy:relativepath' }
+    ]
+  ]
+  '.tree-view .file, .tab.texteditor': [
+    label: 'Path Copy'
+    submenu:[
+      { label: 'Copy Full Path', command: 'path-copy:fullpath' },
+      { label: 'Copy Full Name', command: 'path-copy:fullname' },
+      { label: 'Copy Short Name', command: 'path-copy:shortname' },
+      { label: 'Copy Extension', command: 'path-copy:extension' },
+      { label: 'Copy Folder Path', command: 'path-copy:folderpath' },
+      { label: 'Copy Project Path', command: 'path-copy:projectpath' },
+      { label: 'Copy Relative Path', command: 'path-copy:relativepath' }
+    ]
+  ]
+
+'menu': [
+  {
+    label: 'Packages'
+    submenu: [
+      label: 'Path Copy'
+      submenu: [
+        { label: 'Copy Full Path', command: 'path-copy:fullpath' },
+        { label: 'Copy Full Name', command: 'path-copy:fullname' },
+        { label: 'Copy Short Name', command: 'path-copy:shortname' },
+        { label: 'Copy Extension', command: 'path-copy:extension' },
+        { label: 'Copy Folder Path', command: 'path-copy:folderpath' },
+        { label: 'Copy Project Path', command: 'path-copy:projectpath' },
+        { label: 'Copy Relative Path', command: 'path-copy:relativepath' }
+      ]
+    ]
+  }
+]
