@@ -5,7 +5,7 @@
   "description": "Copy editor file path from the tab context menu.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/msansoni/atom-path-copy.git"
+    "url": "git@github.com:msansoni/atom-path-copy.git"
   },
   "bugs": {
     "url": "https://github.com/msansoni/atom-path-copy/issues"
